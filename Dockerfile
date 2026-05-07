@@ -77,6 +77,9 @@ RUN php tools/generateManualHtml.php \
 # Writable dirs (cfg.php, log/, storage/, private/ are bind-mounted from host)
 RUN mkdir -p log storage private && chown -R www-data:www-data log storage private
 
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 80
-ENTRYPOINT ["/usr/bin/tini", "--"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
