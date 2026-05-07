@@ -17,13 +17,13 @@
 SET NAMES utf8mb4;
 
 ALTER TABLE supplier
-  ADD COLUMN IF NOT EXISTS invoice_number_format     VARCHAR(60) NULL DEFAULT NULL
+  ADD COLUMN invoice_number_format     VARCHAR(60) NULL DEFAULT NULL
     COMMENT 'Per-supplier template pro varsymbol (typ invoice). NULL = fallback na cfg.varsymbol.templates.invoice.',
-  ADD COLUMN IF NOT EXISTS proforma_number_format    VARCHAR(60) NULL DEFAULT NULL
+  ADD COLUMN proforma_number_format    VARCHAR(60) NULL DEFAULT NULL
     COMMENT 'Per-supplier template pro varsymbol (typ proforma). NULL = fallback na cfg.',
-  ADD COLUMN IF NOT EXISTS credit_note_number_format VARCHAR(60) NULL DEFAULT NULL
+  ADD COLUMN credit_note_number_format VARCHAR(60) NULL DEFAULT NULL
     COMMENT 'Per-supplier template pro varsymbol (typ credit_note). NULL = fallback na cfg.',
-  ADD COLUMN IF NOT EXISTS invoice_number_period     ENUM('year','month','none') NOT NULL DEFAULT 'month'
+  ADD COLUMN invoice_number_period     ENUM('year','month','none') NOT NULL DEFAULT 'month'
     COMMENT 'Reset countru: year = 1.1., month = 1. dne v měsíci, none = nikdy.';
 
 -- Rozšiř period column (CHAR(6) -> VARCHAR(10)) pro podporu year/none scope.

@@ -7,5 +7,5 @@
 SET NAMES utf8mb4;
 
 ALTER TABLE supplier
-  ADD COLUMN IF NOT EXISTS commercial_register VARCHAR(255) NULL DEFAULT NULL
+  ADD COLUMN commercial_register VARCHAR(255) NULL DEFAULT NULL
     AFTER tagline;

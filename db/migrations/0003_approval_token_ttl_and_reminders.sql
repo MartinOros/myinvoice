@@ -13,11 +13,11 @@
 SET NAMES utf8mb4;
 
 ALTER TABLE invoices
-  ADD COLUMN IF NOT EXISTS approval_token_expires_at TIMESTAMP NULL DEFAULT NULL
+  ADD COLUMN approval_token_expires_at TIMESTAMP NULL DEFAULT NULL
     AFTER approval_token,
-  ADD COLUMN IF NOT EXISTS approval_reminder_at TIMESTAMP NULL DEFAULT NULL
+  ADD COLUMN approval_reminder_at TIMESTAMP NULL DEFAULT NULL
     AFTER approval_decided_at,
-  ADD COLUMN IF NOT EXISTS approval_reminder_count TINYINT UNSIGNED NOT NULL DEFAULT 0
+  ADD COLUMN approval_reminder_count TINYINT UNSIGNED NOT NULL DEFAULT 0
     AFTER approval_reminder_at,
   -- Index pro cron query: najdi requested + posledni reminder/request starsi nez X dni
-  ADD KEY IF NOT EXISTS idx_inv_approval_reminder (approval_status, approval_reminder_at, approval_requested_at);
+  ADD KEY idx_inv_approval_reminder (approval_status, approval_reminder_at, approval_requested_at);

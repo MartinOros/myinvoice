@@ -22,5 +22,5 @@ CREATE TABLE IF NOT EXISTS exchange_rates (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE invoices
-  ADD COLUMN IF NOT EXISTS exchange_rate DECIMAL(14,6) NULL DEFAULT NULL
+  ADD COLUMN exchange_rate DECIMAL(14,6) NULL DEFAULT NULL
     AFTER currency_id;
