@@ -171,4 +171,7 @@ EOF
     chown www-data:www-data /var/www/html/cfg.php
 fi
 
+# Run DB migrations automatically
+php /var/www/html/api/bin/migrate.php
+
 exec "$@"
