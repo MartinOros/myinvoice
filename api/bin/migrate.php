@@ -82,7 +82,17 @@ foreach ($pending as $file) {
             if ($cleaned === '') {
                 continue;
             }
-            $db->exec($stmt);
+            try {
+                $db->exec($stmt);
+            } catch (\PDOException $e) {
+                $code = (int) $e->errorInfo[1];
+                // 1060 = column already exists, 1061 = index already exists, 1050 = table already exists
+                // MySQL 8.0 does not support IF NOT EXISTS for ADD COLUMN / ADD KEY (MariaDB extension)
+                if (in_array($code, [1060, 1061, 1050], true)) {
+                    continue;
+                }
+                throw $e;
+            }
         }
     } catch (\Throwable $e) {
         echo "FAILED\n";
